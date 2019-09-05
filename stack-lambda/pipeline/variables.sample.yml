@@ -1,0 +1,8 @@
+env: ($ environment $)
+project: ($ project $)
+customer: ($ organization_canonical $)
+
+# Code repo configuration
+lambda_git_repository: https://github.com/mvohra447/private_stack/
+lambda_git_ssh_key: ((git_mohit_ssh.ssh_key))
+lambda_git_branch: code
