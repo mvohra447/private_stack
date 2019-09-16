@@ -33,28 +33,6 @@ jobs:
         passed: [git-build]
         trigger: true
 
-      - get: s3_lambda-release
-        trigger: true
-        passed: [git-build]
-
-      - task: test
-        config:
-          platform: linux
-          image_resource:
-            type: docker-image
-            source:
-              repository: cycloid/cycloid-toolkit
-              tag: latest
-          run:
-            path: /bin/bash
-            args:
-            - -exc
-            - |
-              unzip code/((project)).zip
-          inputs:
-          - name: s3_lambda-release
-            path: code
-
       - task: build-release
         config:
           platform: linux
@@ -77,6 +55,35 @@ jobs:
           outputs:
           - name: release
             path: "release"
+
+  - name: unittest
+    max_in_flight: 1
+    build_logs_to_retain: 10
+    plan:
+    - do:
+      - get: git_code
+        passed: [git-build]
+      - get: s3_lambda-release
+        trigger: true
+        passed: [git-build]
+
+      - task: test
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: cycloid/cycloid-toolkit
+              tag: latest
+          run:
+            path: /bin/bash
+            args:
+            - -exc
+            - |
+              unzip code/((project)).zip
+          inputs:
+          - name: s3_lambda-release
+            path: code
 
       - put: s3_lambda-release
         params:
