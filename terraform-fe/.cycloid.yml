@@ -1,12 +1,11 @@
 # Configuration of the CI pipeline
-
 name: 'Terraform FE implementation'
-canonical: 'terraform with fe'
+canonical: 'terraform-fe'
 description: 'Stack which will help us to implement an FE instance using Terraform'
 keywords:
-  - 'FE'
-  - 'Terraform'
-  - 'Concourse'
+  - 'fe'
+  - 'terraform'
+  - 'concourse'
 technologies:
   - technology: FE
   - version: n/a
