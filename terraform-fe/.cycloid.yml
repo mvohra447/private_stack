@@ -1,7 +1,7 @@
 # Configuration of the CI pipeline
 
 name: 'Terraform FE implementation'
-canonical: 'Terraform with FE'
+canonical: 'terraform with fe'
 description: 'Stack which will help us to implement an FE instance using Terraform'
 keywords:
   - 'FE'
