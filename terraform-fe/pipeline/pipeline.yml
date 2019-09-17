@@ -88,7 +88,7 @@ jobs:
       - put: s3_conFE-release
         params:
           acl: private
-          file: release/((conFE_bucket_object_path))
+          file: ((conFE_bucket_object_path))
 
   - name: unittest
     max_in_flight: 1
