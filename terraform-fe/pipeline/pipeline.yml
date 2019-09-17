@@ -3,6 +3,7 @@ groups:
     jobs:
     - conFE-build
     - unittest
+    - terraform-plan
 
 resources:
   - name: git_conFE-code
@@ -22,6 +23,27 @@ resources:
       region_name: ((aws_default_region))
       access_key_id: ((aws_access_key))
       secret_access_key: ((aws_secret_key))
+
+  - name: tfstate
+    type: terraform
+    source:
+      backend_type: s3
+      backend-config:
+        bucket: ((terraform_storage_bucket_path))
+        key: ((terraform_storage_bucket_path))/terraform.tfstate
+        region: ((aws_default_region))
+        access_key: ((aws_access_key))
+        secret_key: ((aws_secret_key))
+
+  - name: git_stack
+    type: git
+    check_every: 2m
+    source:
+      uri: ((conFE_git_repository))
+      branch: stacks
+      private_key: ((conFE_git_ssh_key))
+      paths:
+        - terraform-fe/terraform/*
 
 jobs:
   - name: conFE-build
@@ -88,3 +110,19 @@ jobs:
           inputs:
           - name: s3_conFE-release
             path: code
+
+  - name: terraform-plan
+    max_in_flight: 1
+    build_logs_to_retain: 10
+    plan:
+    - do:
+      - get: git_conFE-code
+        passed: [unittest]
+      - get: git_stack
+        trigger: true
+
+      - put: tfstate
+        params:
+          env_name: "dev"
+          plan_only: true
+          terraform_source: git_stack/terraform-fe/terraform
