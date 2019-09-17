@@ -25,8 +25,8 @@ resources:
     type: s3
     source:
       bucket: ((conFE_bucket_name))
-      region_name: ((aws_default_region))
-      key: ((terraform_storage_bucket_path))/((project))-((env)).tfstate
+      region_name: ((aws_default_region)
+      key: ((project))-((env)).tfstate
       workspace_key_prefix: ((project))
       access_key_id: ((aws_access_key))
       secret_access_key: ((aws_secret_key))
@@ -38,7 +38,7 @@ resources:
       backend_type: s3
       backend_config:
         bucket: ((terraform_storage_bucket_name))
-        key: ((terraform_storage_bucket_path))/((project))-dev.tfstate
+        key: ((terraform_storage_bucket_path))/((project))/((project))-dev.tfstate
         region: ((aws_default_region))
         access_key: ((aws_access_key))
         secret_key: ((aws_secret_key))
@@ -88,7 +88,7 @@ jobs:
       - put: s3_conFE-release
         params:
           acl: private
-          file: ((conFE_bucket_object_path))
+          file: release/((project)).zip
 
   - name: unittest
     max_in_flight: 1
