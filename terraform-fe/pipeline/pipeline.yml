@@ -130,6 +130,9 @@ jobs:
         passed: [unittest]
       - get: git_stack
         trigger: true
+      - get: s3_conFE-release
+        passed: [unittest]
+        trigger: true
 
       - put: tfstate
         params:
@@ -142,10 +145,6 @@ jobs:
     build_logs_to_retain: 10
     plan:
     - do:
-      - get: git_conFE-code
-        passed: [terraform-plan]
-      - get: s3_conFE-release
-        passed: [terraform-plan]
       - get: tfstate
         passed: [terraform-plan]
       - get: git_stack
