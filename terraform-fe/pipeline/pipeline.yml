@@ -7,11 +7,10 @@ groups:
 
 resource_types:
   - name: terraform
-    type: git
+    type: docker-image
     source:
-      uri: ((conFE_git_repository))
-      branch: stacks
-      private_key: ((conFE_git_ssh_key))
+      repository: ljfranklin/terraform-resource
+      tag: '0.12.6'
 
 resources:
   - name: git_conFE-code
@@ -35,10 +34,11 @@ resources:
   - name: tfstate
     type: terraform
     source:
+      env_name: "dev"
       backend_type: s3
       backend-config:
         bucket: ((terraform_storage_bucket_path))
-        key: ((terraform_storage_bucket_path))/terraform.tfstate
+        key: ((terraform_storage_bucket_path))/terraform-fe-mohit.tfstate
         region: ((aws_default_region))
         access_key: ((aws_access_key))
         secret_key: ((aws_secret_key))
