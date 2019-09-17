@@ -88,7 +88,7 @@ jobs:
       - put: s3_conFE-release
         params:
           acl: private
-          file: release/((terraform_storage_bucket_path))/((project)).zip
+          file: release/((conFE_bucket_object_path))
 
   - name: unittest
     max_in_flight: 1
@@ -114,7 +114,7 @@ jobs:
             args:
             - -exc
             - |
-              unzip code/((terraform_storage_bucket_path))/((project)).zip
+              unzip code/((conFE_bucket_object_path))
           inputs:
           - name: s3_conFE-release
             path: code
