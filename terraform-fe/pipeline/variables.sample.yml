@@ -3,9 +3,9 @@ project: ($ project $)
 customer: ($ organization_canonical $)
 
 # Code repo configuration
-conFe_git_repository: git@github.com:mvohra447/private_stack.git
-conFe_git_ssh_key: ((git_git_mohit_ssh.ssh_key))
-conFe_git_branch: code
+conFE_git_repository: git@github.com:mvohra447/private_stack.git
+conFE_git_ssh_key: ((git_git_mohit_ssh.ssh_key))
+conFE_git_branch: code
 
 aws_access_key: ((aws_mohit_aws.access_key))
 aws_secret_key: ((aws_mohit_aws.secret_key))
