@@ -13,7 +13,7 @@ aws_default_region: us-east-2
 
  # AWS s3 bucket used for conFe release code
 conFE_bucket_name: s3-bucket-mohit
-conFE_bucket_object_path: /($ project $)/($ environment $)/($ project $).zip
+conFE_bucket_object_path: ($ project $)/($ environment $)/($ project $).zip
 
 terraform_storage_bucket_name: s3-bucket-mohit
 terraform_storage_bucket_path: ($ project $)/($ environment $)
