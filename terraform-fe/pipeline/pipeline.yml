@@ -6,12 +6,12 @@ groups:
     - terraform-plan
 
 resource_types:
-  type: terraform
-  type: git
-  source:
-    uri: ((conFE_git_repository))
-    branch: stacks
-    private_key: ((conFE_git_ssh_key))
+  - name: terraform
+    type: git
+    source:
+      uri: ((conFE_git_repository))
+      branch: stacks
+      private_key: ((conFE_git_ssh_key))
 
 resources:
   - name: git_conFE-code
