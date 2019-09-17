@@ -4,6 +4,7 @@ groups:
     - conFE-build
     - unittest
     - terraform-plan
+    - terraform-apply
 
 resource_types:
   - name: terraform
@@ -134,4 +135,24 @@ jobs:
         params:
           env_name: "dev"
           plan_only: true
+          terraform_source: git_stack/terraform-fe/terraform
+
+  - name: terraform-apply
+    max_in_flight: 1
+    build_logs_to_retain: 10
+    plan:
+    - do:
+      - get: git_conFE-code
+        passed: [terraform-plan]
+      - get: s3_conFE-release
+        passed: [terraform-plan]
+      - get: tfstate
+        passed: [terraform-plan]
+      - get: git_stack
+        passed: [terraform-plan]
+
+      - put: tfstate
+        params:
+          env_name: "dev"
+          plan_run: true
           terraform_source: git_stack/terraform-fe/terraform
