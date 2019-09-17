@@ -36,7 +36,7 @@ resources:
     source:
       env_name: "dev"
       backend_type: s3
-      backend-config:
+      backend_config:
         bucket: ((terraform_storage_bucket_path))
         key: ((terraform_storage_bucket_path))/terraform-fe-mohit.tfstate
         region: ((aws_default_region))
