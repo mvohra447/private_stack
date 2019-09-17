@@ -115,7 +115,7 @@ jobs:
             args:
             - -exc
             - |
-              unzip code/((conFE_bucket_object_path))
+              unzip code/((project)).zip
           inputs:
           - name: s3_conFE-release
             path: code
