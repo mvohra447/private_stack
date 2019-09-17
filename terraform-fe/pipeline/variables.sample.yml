@@ -12,5 +12,5 @@ aws_secret_key: ((aws_mohit_aws.secret_key))
 aws_default_region: us-east-2
 
  # AWS s3 bucket used for conFe release code
-conFE_release_bucket_name: s3-bucket-mohit
-conFE_release_bucket_object_path: /($ project $)/($ environment $)/($ project $).zip
+conFE_bucket_name: s3-bucket-mohit
+conFE_bucket_object_path: /($ project $)/($ environment $)/($ project $).zip

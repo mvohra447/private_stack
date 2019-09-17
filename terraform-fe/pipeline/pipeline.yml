@@ -16,8 +16,8 @@ resources:
   - name: s3_conFE-release
     type: s3
     source:
-      bucket: ((conFE_release_bucket_name))
-      versioned_file: ((conFE_release_bucket_object_path))
+      bucket: ((conFE_bucket_name))
+      versioned_file: ((conFE_bucket_object_path))
       private: true
       region_name: ((aws_default_region))
       access_key_id: ((aws_access_key))
